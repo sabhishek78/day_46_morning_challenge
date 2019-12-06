@@ -18,4 +18,19 @@
 //  Output: [1,2,3,1]
 
 main() {
+  print(distributeCandies(7,4));
+}
+List<int> distributeCandies(int candies, int people){
+ int numberOfTerms=terms(candies);
+ fillList(numberOfTerms,candies,people);
+}
+int terms(int candies){
+  int n=1;
+  while(n*(n+1)/2<candies){
+    n++;
+  }
+  return n;
+}
+List<int> fillList(int numberOfTerms, int candies, int people){
+  List<int> finalList=[];
 }
