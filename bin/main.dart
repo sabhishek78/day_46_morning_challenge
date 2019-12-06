@@ -18,11 +18,20 @@
 //  Output: [1,2,3,1]
 
 main() {
-  print(distributeCandies(7,4));
+ print(distributeCandies(7,4));
+ print(distributeCandies(5,2));
+ print(coinsEarned(5,0));
+print(coinsEarned(5,1));
+print(coinsEarned(5,2));
+print(coinsEarned(5,3));
+print(coinsEarned(5,4));
 }
-List<int> distributeCandies(int candies, int people){
- int numberOfTerms=terms(candies);
- fillList(numberOfTerms,candies,people);
+List<int> generateInputList(int candies){
+  int n=terms(candies);
+  List<int> inputList=List<int>.generate(n-1, (i) => i + 1);
+  int  S= ((n-1)*n/2).toInt();
+  inputList.add(candies-S);
+  return inputList;
 }
 int terms(int candies){
   int n=1;
@@ -31,6 +40,65 @@ int terms(int candies){
   }
   return n;
 }
-List<int> fillList(int numberOfTerms, int candies, int people){
-  List<int> finalList=[];
+List<int> distributeCandies(int candies,int people){
+  List<int> inputList=generateInputList(candies);
+  List<int> outputList=List<int>.generate(people,(i)=>0);
+ //print(outputList);
+// print(inputList);
+  int count=0;
+  while(count<inputList.length){
+    for(int i=0;i<outputList.length;i++){
+      if(!(count<inputList.length)){
+        return outputList;
+      }
+      outputList[i]=outputList[i]+inputList[count];
+      count++;
+    }
+  }
+  return outputList;
 }
+
+
+// Challenge 2
+// Burst Balloons
+// Given n balloons, indexed from 0 to n-1. Each balloon is painted with a number
+// on it represented by array nums. You are asked to burst all the balloons.
+// If the you burst balloon i you will get nums[left] * nums[i] * nums[right] coins.
+// Here left and right are adjacent indices of i. After the burst, the left and
+// right then becomes adjacent.
+//
+//  Find the maximum coins you can collect by bursting the balloons wisely.
+
+// Stage 1
+// Write a function which calculates total coins earned by bursting a balloon at index 'i'
+
+// Stage 2
+// Implement the algorithm to calculate the maximum coins that can be earned.
+coinsEarned(int numberOfBalloons,int ballonBurstIndex){
+  List<int> balloonList=List<int>.generate(numberOfBalloons,(i)=>i);
+  //print(balloonList);
+  int leftIndex;
+  int rightIndex;
+  if(balloonList.isEmpty){
+    return 0;
+  }
+  if(balloonList.length==1){
+    return 0;
+  }
+  if(ballonBurstIndex==0){
+    leftIndex=1;
+  }
+  else{
+    leftIndex=ballonBurstIndex-1;
+  }
+  if(ballonBurstIndex==balloonList.length-1){
+    rightIndex=1;
+  }else{
+    rightIndex=ballonBurstIndex+1;
+  }
+  return balloonList[leftIndex]*balloonList[ballonBurstIndex]*balloonList[rightIndex];
+
+
+}
+
+

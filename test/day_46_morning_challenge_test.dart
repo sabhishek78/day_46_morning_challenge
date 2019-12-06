@@ -8,19 +8,19 @@ void main() {
         [1,2,3,1]);
   });
   test('distribute Candies', () {
-    expect(distributeCandies(1,5),
+    expect(distributeCandies(5,1),
         [5]);
   });
   test('distribute Candies', () {
-    expect(distributeCandies(2,5),
-        [1,4]);
+    expect(distributeCandies(5,2),
+        [3,2]);
   });
   test('distribute Candies', () {
-    expect(distributeCandies(3,5),
+    expect(distributeCandies(5,3),
         [1,2,2]);
   });
   test('distribute Candies', () {
-    expect(distributeCandies(4,5),
+    expect(distributeCandies(5,4),
         [1,2,2,0]);
   });
   test('distribute Candies', () {
@@ -28,11 +28,35 @@ void main() {
         [1,2,2,0,0]);
   });
   test('distribute Candies', () {
-    expect(distributeCandies(2,8),
-        [4,6]);
+    expect(distributeCandies(8,2),
+        [4,4]);
   });
   test('distribute Candies', () {
-    expect(distributeCandies(3,8),
+    expect(distributeCandies(8,3),
         [3,2,3]);
+  });
+  test('Burst Balloons', () {
+    expect(coinsEarned(5,0),
+        0);
+  });
+  test('Burst Balloons', () {
+    expect(coinsEarned(5,1),
+        0);
+  });
+  test('Burst Balloons', () {
+    expect(coinsEarned(5,2),
+        6);
+  });
+  test('Burst Balloons', () {
+    expect(coinsEarned(5,3),
+        24);
+  });
+  test('Burst Balloons', () {
+    expect(coinsEarned(5,4),
+        12);
+  });
+  test('Burst Balloons', () {
+    expect(coinsEarned(1,0),
+        0);
   });
 }
