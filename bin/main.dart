@@ -18,13 +18,16 @@
 //  Output: [1,2,3,1]
 
 main() {
- print(distributeCandies(7,4));
- print(distributeCandies(5,2));
- print(coinsEarned(5,0));
-print(coinsEarned(5,1));
-print(coinsEarned(5,2));
-print(coinsEarned(5,3));
-print(coinsEarned(5,4));
+ //print(distributeCandies(7,4));
+// print(distributeCandies(5,2));
+//print(coinsEarnedAtIndex([5],0)) ;
+//print(coinsEarnedAtIndex([5],1)) ;
+//print(coinsEarnedAtIndex([1,2],0));
+//print(coinsEarnedAtIndex([1,2],1));
+//print(coinsEarnedAtIndex([1,2,3],0)) ;
+//print(coinsEarnedAtIndex([1,2,3],1)) ;
+//print(coinsEarnedAtIndex([1,2,3],2)) ;
+print(maxCoinsEarned([1,2,3]));
 }
 List<int> generateInputList(int candies){
   int n=terms(candies);
@@ -74,31 +77,46 @@ List<int> distributeCandies(int candies,int people){
 
 // Stage 2
 // Implement the algorithm to calculate the maximum coins that can be earned.
-coinsEarned(int numberOfBalloons,int ballonBurstIndex){
-  List<int> balloonList=List<int>.generate(numberOfBalloons,(i)=>i);
-  //print(balloonList);
-  int leftIndex;
-  int rightIndex;
-  if(balloonList.isEmpty){
-    return 0;
-  }
-  if(balloonList.length==1){
-    return 0;
-  }
-  if(ballonBurstIndex==0){
-    leftIndex=1;
-  }
-  else{
-    leftIndex=ballonBurstIndex-1;
-  }
-  if(ballonBurstIndex==balloonList.length-1){
-    rightIndex=1;
-  }else{
-    rightIndex=ballonBurstIndex+1;
-  }
-  return balloonList[leftIndex]*balloonList[ballonBurstIndex]*balloonList[rightIndex];
+coinsEarnedAtIndex(List balloonList,int balloonIndex){
+  int leftIndexValue;
+  int rightIndexValue;
+ if(balloonIndex>=balloonList.length){
+   return 0;
+ }
+ else if(balloonIndex==0){
+     if(balloonList.length==1){
+       leftIndexValue=1;
+       rightIndexValue=1;
+     }
+     else{
+       leftIndexValue=1;
+       rightIndexValue=balloonList[balloonIndex+1];
+     }
+   }
+   else if(balloonIndex==balloonList.length-1){
+   leftIndexValue=balloonList[balloonIndex-1];
+     rightIndexValue=1;
+   }
+   else {
+   leftIndexValue=balloonList[balloonIndex-1];
+   rightIndexValue=balloonList[balloonIndex+1];
+   }
+ return leftIndexValue*balloonList[balloonIndex]*rightIndexValue;
+ }
 
-
+maxCoinsEarned(List<int> balloonList){
+ if(balloonList.length==1){
+   return balloonList.first;
+ }
+ int maxCoins=0;
+ for(int i=0;i<balloonList.length;i++){
+   List<int> copy=List.from(balloonList);
+   int coinsFromI=coinsEarnedAtIndex(copy,i);
+   copy.removeAt(i);
+   coinsFromI=coinsFromI+maxCoinsEarned(copy);
+   if(maxCoins<coinsFromI){
+     maxCoins=coinsFromI;
+   }
+ }
+ return maxCoins;
 }
-
-
