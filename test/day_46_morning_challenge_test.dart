@@ -36,27 +36,39 @@ void main() {
         [3,2,3]);
   });
   test('Burst Balloons', () {
-    expect(coinsEarned(5,0),
-        0);
+    expect(coinsEarnedAtIndex([1,2,3,4],0),
+        2);
   });
   test('Burst Balloons', () {
-    expect(coinsEarned(5,1),
-        0);
-  });
-  test('Burst Balloons', () {
-    expect(coinsEarned(5,2),
+    expect(coinsEarnedAtIndex([1,2,3,4],1),
         6);
   });
   test('Burst Balloons', () {
-    expect(coinsEarned(5,3),
+    expect(coinsEarnedAtIndex([1,2,3,4],2),
         24);
   });
   test('Burst Balloons', () {
-    expect(coinsEarned(5,4),
+    expect(coinsEarnedAtIndex([1,2,3,4],3),
         12);
   });
-  test('Burst Balloons', () {
-    expect(coinsEarned(1,0),
+  test('print max coins', () {
+    expect( maxCoinsEarned([1,2,3,4]),
+        40);
+  });
+  test('print max coins', () {
+    expect( maxCoinsEarned([5,2,3,4]),
+        115);
+  });
+  test('print max coins', () {
+    expect( maxCoinsEarned([5]),
+        5);
+  });
+  test('print max coins', () {
+    expect( maxCoinsEarned([5,5]),
+        30);
+  });
+  test('print max coins', () {
+    expect( maxCoinsEarned([]),
         0);
   });
 }
